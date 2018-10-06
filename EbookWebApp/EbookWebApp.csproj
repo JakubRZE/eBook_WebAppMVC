@@ -212,10 +212,16 @@
     <Compile Include="Migrations\201810122257275_UpdatedFieldInAspUserTable.Designer.cs">
       <DependentUpon>201810122257275_UpdatedFieldInAspUserTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810130130069_addedBookandOrderModels.cs" />
+    <Compile Include="Migrations\201810130130069_addedBookandOrderModels.Designer.cs">
+      <DependentUpon>201810130130069_addedBookandOrderModels.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Book.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Order.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -345,6 +351,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810122257275_UpdatedFieldInAspUserTable.resx">
       <DependentUpon>201810122257275_UpdatedFieldInAspUserTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810130130069_addedBookandOrderModels.resx">
+      <DependentUpon>201810130130069_addedBookandOrderModels.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

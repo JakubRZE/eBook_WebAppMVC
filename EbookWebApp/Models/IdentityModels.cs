@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
@@ -19,7 +20,7 @@ namespace EbookWebApp.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime RegistrationDate { get; set; }
 
-        //public virtual ICollection<rentalmodel> Rentals {get; set; }
+        public virtual ICollection<Order> Orders {get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -41,5 +42,8 @@ namespace EbookWebApp.Models
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<Book> Books { get; set; }
+        public DbSet<Order> Orders { get; set; }
     }
 }
