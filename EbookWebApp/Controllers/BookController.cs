@@ -15,9 +15,17 @@ namespace EbookWebApp.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Book
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
-            return View(db.Books.ToList());
+            var ebook = from b in db.Books
+                        select b;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                ebook = ebook.Where(x => x.Title.Contains(searchString));
+            }
+
+            return View(ebook);
         }
 
         // GET: Book/Details/5

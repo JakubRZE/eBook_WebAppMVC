@@ -24,6 +24,7 @@ namespace EbookWebApp.Models
         public string LastName { get; set; }
 
         [Display(Name = "Registration date:")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}")]
         public DateTime RegistrationDate { get; set; }
 
     }

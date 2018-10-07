@@ -10,7 +10,7 @@ namespace EbookWebApp.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "Book");
         }
 
         public ActionResult About()
