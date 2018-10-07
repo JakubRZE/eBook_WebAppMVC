@@ -15,17 +15,35 @@ namespace EbookWebApp.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Book
-        public ActionResult Index(string searchString)
+        public ActionResult Index(string sortOrder, string searchString)
         {
-            var ebook = from b in db.Books
-                        select b;
 
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            var books = from s in db.Books
+                           select s;
             if (!String.IsNullOrEmpty(searchString))
             {
-                ebook = ebook.Where(x => x.Title.Contains(searchString));
+                books = books.Where(s => s.Title.Contains(searchString)
+                                       || s.Author.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    books = books.OrderByDescending(s => s.Title);
+                    break;
+                case "Date":
+                    books = books.OrderBy(s => s.ReleaseDate);
+                    break;
+                case "date_desc":
+                    books = books.OrderByDescending(s => s.ReleaseDate);
+                    break;
+                default:
+                    books = books.OrderBy(s => s.Title);
+                    break;
             }
 
-            return View(ebook);
+            return View(books.ToList());
         }
 
         // GET: Book/Details/5
