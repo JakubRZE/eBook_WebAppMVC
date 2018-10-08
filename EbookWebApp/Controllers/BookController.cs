@@ -18,7 +18,7 @@ namespace EbookWebApp.Controllers
         public ActionResult Index(string sortOrder, string searchString)
         {
 
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.TitleSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
             var books = from s in db.Books
                            select s;
