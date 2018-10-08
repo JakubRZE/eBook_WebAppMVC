@@ -15,28 +15,51 @@ namespace EbookWebApp.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Book
-        public ActionResult Index(string sortOrder, string searchString)
+        public ActionResult Index(string sortOrder, string searchString, string bookGenre)
         {
+            
 
-            ViewBag.TitleSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewBag.TitleSortParm = sortOrder == "Title_desc" ? "Title_asc" : "Title_desc";
+            ViewBag.AuthorSortParm = sortOrder == "Author_desc" ? "Author_asc" : "Author_desc";
+            ViewBag.DateSortParm = sortOrder == "Date_desc" ? "Date_asc" : "Date_desc";
+
+            var GenreLst = new List<string>();
+            var GenreQry = from d in db.Books
+                           orderby d.Genre
+                           select d.Genre;
+            GenreLst.AddRange(GenreQry.Distinct());
+            ViewBag.bookGenre = new SelectList(GenreLst);
+
             var books = from s in db.Books
                            select s;
-            if (!String.IsNullOrEmpty(searchString))
+
+            if (!string.IsNullOrEmpty(bookGenre))
             {
-                books = books.Where(s => s.Title.Contains(searchString)
-                                       || s.Author.Contains(searchString));
+                books = books.Where(s => (s.Title.Contains(searchString) || s.Author.Contains(searchString) ) && s.Genre == bookGenre);
+            }
+            else if (!String.IsNullOrEmpty(searchString))
+            {
+                books = books.Where(s => s.Title.Contains(searchString) || s.Author.Contains(searchString));
             }
             switch (sortOrder)
             {
-                case "name_desc":
+                case "Title_desc":
                     books = books.OrderByDescending(s => s.Title);
                     break;
-                case "Date":
+                case "Title_asc":
                     books = books.OrderBy(s => s.ReleaseDate);
                     break;
-                case "date_desc":
+                case "Author_desc":
                     books = books.OrderByDescending(s => s.ReleaseDate);
+                    break;
+                case "Author_asc":
+                    books = books.OrderBy(s => s.ReleaseDate);
+                    break;
+                case "Date_desc":
+                    books = books.OrderByDescending(s => s.ReleaseDate);
+                    break;
+                case "Date_asc":
+                    books = books.OrderBy(s => s.ReleaseDate);
                     break;
                 default:
                     books = books.OrderBy(s => s.Title);
