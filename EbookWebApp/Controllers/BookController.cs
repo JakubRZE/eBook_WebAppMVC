@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using EbookWebApp.Models;
+using EbookWebApp.ViewModels;
 
 namespace EbookWebApp.Controllers
 {
@@ -15,7 +16,7 @@ namespace EbookWebApp.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Book
-        public ActionResult Index(string sortOrder, string searchString, string bookGenre)
+        public ActionResult Index( BookViewModel model, string sortOrder, string searchString, string bookGenre)
         {
             
 
