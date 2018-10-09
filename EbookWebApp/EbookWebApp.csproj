@@ -201,10 +201,6 @@
     <Compile Include="Migrations\201810051723382_InitialCreate.Designer.cs">
       <DependentUpon>201810051723382_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201810091752290_bookmodelupdate.cs" />
-    <Compile Include="Migrations\201810091752290_bookmodelupdate.Designer.cs">
-      <DependentUpon>201810091752290_bookmodelupdate.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201810122245487_AddedFieldsinAspUserTable.cs" />
     <Compile Include="Migrations\201810122245487_AddedFieldsinAspUserTable.Designer.cs">
       <DependentUpon>201810122245487_AddedFieldsinAspUserTable.cs</DependentUpon>
@@ -352,9 +348,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201810051723382_InitialCreate.resx">
       <DependentUpon>201810051723382_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201810091752290_bookmodelupdate.resx">
-      <DependentUpon>201810091752290_bookmodelupdate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810122245487_AddedFieldsinAspUserTable.resx">
       <DependentUpon>201810122245487_AddedFieldsinAspUserTable.cs</DependentUpon>
