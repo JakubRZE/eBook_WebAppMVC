@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -45,5 +46,6 @@ namespace EbookWebApp.Models
 
         public DbSet<Book> Books { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public IEnumerable ApplicationUsers { get; internal set; }
     }
 }

@@ -1,14 +1,15 @@
-﻿@model IEnumerable<EbookWebApp.ViewModels.BookViewModel>
- 
-@{
-    ViewBag.Title = "Index";
-}
+﻿    @using Microsoft.AspNet.Identity
+    @model IEnumerable<EbookWebApp.ViewModels.BookViewModel>
 
-<div class="row margin-top-30">
-    <div class="col-md-12 text-center">
-        <p class="lead movie-logo "> e-Book Store </p>
+    @{
+        ViewBag.Title = "Index";
+    }
+
+    <div class="row margin-top-30">
+        <div class="col-md-12 text-center">
+            <p class="lead movie-logo "> e-Book Store </p>
+        </div>
     </div>
-</div>
 
 
     @using (Html.BeginForm(new { @class = "form-inline" }))
@@ -38,25 +39,37 @@
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Author)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Genre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ReleaseDate)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReleaseDate)
+            </td>
+
+            @if (Request.IsAuthenticated)
+            {
+            <td>
+                <a href="/Order/Get?id=1" >Get!</a>
+                @*@Html.ActionLink("Get!", "Get", "Order", FormMethod.Post, new { id = item.Id })*@
+            </td>
+            }
+            else
+            {
+                <td>elo</td>
+            }
+                @*<td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+               </td>*@
+        </tr>
         }
 
     </table>
