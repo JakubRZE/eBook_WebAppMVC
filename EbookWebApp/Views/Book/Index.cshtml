@@ -56,9 +56,14 @@
             @if (Request.IsAuthenticated)
             {
             <td>
-                <a href="/Order/Get?id=1" >Get!</a>
-                @*@Html.ActionLink("Get!", "Get", "Order", FormMethod.Post, new { id = item.Id })*@
-            </td>
+                @using (Html.BeginForm())
+                {
+                  @Html.AntiForgeryToken()
+                <p class="button">
+                    @Html.ActionLink("Get!", "Get", "Order", new { id = item.Id }, "")
+                </p>
+                }
+                </td>
             }
             else
             {
