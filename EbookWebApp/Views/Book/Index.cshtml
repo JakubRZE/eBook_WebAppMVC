@@ -58,12 +58,12 @@
             <td>
                 @using (Html.BeginForm())
                 {
-                  @Html.AntiForgeryToken()
-                <p class="button">
-                    @Html.ActionLink("Get!", "Get", "Order", new { id = item.Id }, "")
-                </p>
+                    //bootstrap modal
+                    <p class="button">
+                         @Html.ActionLink("Get!", "Get", "Order", new { id = item.Id }, "")
+                    </p>
                 }
-                </td>
+            </td>
             }
             else
             {

@@ -16,9 +16,12 @@ namespace EbookWebApp.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Order/Get/5
+        [Authorize]
         public ActionResult Get(int id)
         {
             var userId = User.Identity.GetUserId();
+
+            // Services logic
 
             var order = new Order
             {
@@ -33,9 +36,12 @@ namespace EbookWebApp.Controllers
         }
 
         // GET: Order
+        [Authorize]
         public ActionResult Index()
         {
-            var orders = db.Orders.Include(o => o.AplicationUser).Include(o => o.Book);
+            var userId = User.Identity.GetUserId();
+
+            var orders = db.Orders.Where(u => u.AplicationUserId == userId).Include(o => o.AplicationUser).Include(o => o.Book);
             return View(orders.ToList());
         }
 
