@@ -22,3 +22,25 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/*Added*/
+
+.margin-top-40 {
+    margin-top: 40px;
+}
+
+.margin-top-20 {
+    margin-top: 20px;
+}
+
+.movie-logo {
+    font-size: 100px;
+}
+
+.padding-lg-but {
+    padding: 20px 5px 20px 5px;
+}
+
+.padding-huge {
+    padding: 60px 5px 60px 5px;
+}

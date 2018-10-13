@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
@@ -12,6 +13,19 @@ namespace EbookWebApp.Models
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
+
+        [Display(Name = "User Name:")]
+        public string UserName { get; set; }
+
+        [Display(Name = "First Name:")]
+        public string FirstName { get; set; }
+
+        [Display(Name = "Last Name:")]
+        public string LastName { get; set; }
+
+        [Display(Name = "Registration date:")]
+        public DateTime RegistrationDate { get; set; }
+
     }
 
     public class ManageLoginsViewModel
