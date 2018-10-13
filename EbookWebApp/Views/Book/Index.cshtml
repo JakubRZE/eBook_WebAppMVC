@@ -1,44 +1,44 @@
-﻿    @using Microsoft.AspNet.Identity
-    @model IEnumerable<EbookWebApp.ViewModels.BookViewModel>
+﻿@using Microsoft.AspNet.Identity
+@model IEnumerable<EbookWebApp.ViewModels.BookViewModel>
+ 
+@{
+    ViewBag.Title = "Index";
+}
 
-    @{
-        ViewBag.Title = "Index";
-    }
-
-    <div class="row margin-top-30">
-        <div class="col-md-12 text-center">
-            <p class="lead movie-logo "> e-Book Store </p>
-        </div>
+<div class="row margin-top-30">
+    <div class="col-md-12 text-center">
+        <p class="lead movie-logo "> e-Book Store </p>
     </div>
+</div>
 
 
-    @using (Html.BeginForm(new { @class = "form-inline" }))
+@using (Html.BeginForm(new { @class = "form-inline" }))
+{
+    <input class="form-control mr-sm-2  d-inline" id="SearchString" name="SearchString" type="text" placeholder="Search">
+    @Html.DropDownList("bookGenre", null, "All", new { @class = "form-control mr-sm-2  d-inline" })
+    <button class="btn btn-secondary my-2 my-sm-0 d-inline" type="submit">Submit</button>
+}
+
+
+<table class="table margin-top-20">
+    <tr>
+        <th>
+            @Html.ActionLink("Title", "Index", new { sortOrder = ViewBag.TitleSortParm })
+        </th>
+        <th>
+            @Html.ActionLink("Author", "Index", new { sortOrder = ViewBag.AuthorSortParm })
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Genre)
+        </th>
+        <th>
+            @Html.ActionLink("Release date", "Index", new { sortOrder = ViewBag.DateSortParm })
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
     {
-        <input class="form-control mr-sm-2  d-inline" id="SearchString" name="SearchString" type="text" placeholder="Search">
-        @Html.DropDownList("bookGenre", null, "All", new { @class = "form-control mr-sm-2  d-inline" })
-        <button class="btn btn-secondary my-2 my-sm-0 d-inline" type="submit">Submit</button>
-    }
-
-
-    <table class="table margin-top-20">
-        <tr>
-            <th>
-                @Html.ActionLink("Title", "Index", new { sortOrder = ViewBag.TitleSortParm })
-            </th>
-            <th>
-                @Html.ActionLink("Author", "Index", new { sortOrder = ViewBag.AuthorSortParm })
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Genre)
-            </th>
-            <th>
-                @Html.ActionLink("Release date", "Index", new { sortOrder = ViewBag.DateSortParm })
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
@@ -56,27 +56,36 @@
             @if (Request.IsAuthenticated)
             {
             <td>
-                @using (Html.BeginForm())
-                {
-                    //bootstrap modal
-                    <p class="button">
-                         @Html.ActionLink("Get!", "Get", "Order", new { id = item.Id }, "")
-                    </p>
-                }
+
+                <!-- Button trigger modal -->
+
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                    Get!
+                </button>
+
+
+
+               @Html.Partial("_Confirm", item)
+
+
             </td>
             }
             else
             {
-                <td>elo</td>
+                <td>
+                    <button type="button" class="btn btn-primary">
+                        @Html.ActionLink("Get!", "Login", "Account", new { id = item.Id }, "")
+                    </button>
+                </td>
             }
-                @*<td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-               </td>*@
+            @*<td>
+                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                 @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>*@
         </tr>
-        }
+    }
 
-    </table>
+</table>
 
-    @Html.ActionLink("Create New", "Create")
+@Html.ActionLink("Create New", "Create")

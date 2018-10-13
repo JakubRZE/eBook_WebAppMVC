@@ -23,16 +23,30 @@ namespace EbookWebApp.Controllers
 
             // Services logic
 
-            var order = new Order
+            var OrdersQry = db.Orders.Where(o => o.AplicationUserId == userId && o.BookId == id);
+
+            if (OrdersQry == null)
             {
-                AplicationUserId = userId,
-                BookId = id
-            };
+                var order = new Order
+                {
+                    AplicationUserId = userId,
+                    BookId = id
+                };
 
-            db.Orders.Add(order);
-            db.SaveChanges();
+                db.Orders.Add(order);
+                db.SaveChanges();
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
+
+        private bool IsOrdered()
+        {
+            throw new NotImplementedException();
         }
 
         // GET: Order

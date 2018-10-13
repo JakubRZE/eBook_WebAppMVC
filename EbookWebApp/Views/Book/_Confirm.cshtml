@@ -1,0 +1,52 @@
+﻿@using Microsoft.AspNet.Identity
+@model EbookWebApp.ViewModels.BookViewModel
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Dear @User.Identity.GetUserName() </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Do you want to get :
+
+                <table class="table margin-top-20">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Title)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Author)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Genre)
+                        </th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Author)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Genre)
+                        </td>
+                    </tr>
+                </table>
+
+                @*<p class="text-success">@ViewBag.StatusMessage</p>*@
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary">
+                    @Html.ActionLink("Yes", "Get", "Order", new { id = Model.Id }, "")
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
