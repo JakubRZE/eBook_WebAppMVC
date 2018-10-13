@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using EbookWebApp.Models;
 using EbookWebApp.ViewModels;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 
 namespace EbookWebApp.Controllers
 {
@@ -16,7 +18,7 @@ namespace EbookWebApp.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Book
-        public ActionResult Index( BookViewModel model, string sortOrder, string searchString, string bookGenre)
+        public ActionResult Index(string sortOrder, string searchString, string bookGenre)
         {
             
 
@@ -67,7 +69,12 @@ namespace EbookWebApp.Controllers
                     break;
             }
 
-            return View(books.ToList());
+            var vm = books.ProjectTo<BookViewModel>().ToList();
+
+            //var vm = books.ToList().Select(x => Mapper.Map<BookViewModel>(x)).ToList();
+            
+
+            return View(vm);
         }
 
         // GET: Book/Details/5
