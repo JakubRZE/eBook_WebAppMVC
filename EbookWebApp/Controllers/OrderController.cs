@@ -6,7 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using EbookWebApp.Models;
+using EbookWebApp.ViewModels;
 using Microsoft.AspNet.Identity;
 
 namespace EbookWebApp.Controllers
@@ -19,34 +21,35 @@ namespace EbookWebApp.Controllers
         [Authorize]
         public ActionResult Get(int id)
         {
-            var userId = User.Identity.GetUserId();
-
-            // Services logic
-
-            var OrdersQry = db.Orders.Where(o => o.AplicationUserId == userId && o.BookId == id);
-
-            if (OrdersQry == null)
-            {
-                var order = new Order
-                {
-                    AplicationUserId = userId,
-                    BookId = id
-                };
-
-                db.Orders.Add(order);
-                db.SaveChanges();
-
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                return RedirectToAction("Index");
-            }
+            Book book = db.Books.Find(id);
+            var vm =  Mapper.Map<BookViewModel>(book);
+            return View(vm);
         }
 
-        private bool IsOrdered()
+        //POST Order/Get/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Get([Bind(Include = "Id")] CreateOrderViewModel model)
         {
-            throw new NotImplementedException();
+            var order = db.Orders.SingleOrDefault(o => o.BookId == model.Id);
+            if (ModelState.IsValid)
+            {                
+                if (order == null)
+                {
+                    db.Orders.Add(new Order
+                    {
+                        BookId = model.Id,
+                        AplicationUserId = User.Identity.GetUserId()
+                    });
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+
+            Book book = db.Books.First(o => o.Id == model.Id);
+            var vm = Mapper.Map<BookViewModel>(book);
+            ModelState.AddModelError(String.Empty, "You have already this eBook.");
+            return View(vm);
         }
 
         // GET: Order

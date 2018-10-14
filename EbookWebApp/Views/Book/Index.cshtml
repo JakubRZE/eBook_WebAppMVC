@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNet.Identity
 @model IEnumerable<EbookWebApp.ViewModels.BookViewModel>
- 
+
 @{
     ViewBag.Title = "Index";
 }
@@ -55,26 +55,20 @@
 
             @if (Request.IsAuthenticated)
             {
-            <td>
+                <td>
 
-                <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary">
+                        @Html.ActionLink("Get!", "Get", "Order", new { id = item.Id, @class = "nav-link" }, "")
+                    </button>
 
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                    Get!
-                </button>
-
-
-
-               @Html.Partial("_Confirm", item)
-
-
-            </td>
+                  
+                </td>
             }
             else
             {
                 <td>
                     <button type="button" class="btn btn-primary">
-                        @Html.ActionLink("Get!", "Login", "Account", new { id = item.Id }, "")
+                        @Html.ActionLink("Get!", "Login", "Account", new { id = item.Id, @class = "nav-link" }, "")
                     </button>
                 </td>
             }
@@ -82,7 +76,7 @@
                  @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                  @Html.ActionLink("Details", "Details", new { id = item.Id }) |
                  @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </td>*@
+            </td>*@
         </tr>
     }
 

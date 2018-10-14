@@ -1,0 +1,54 @@
+﻿@using Microsoft.AspNet.Identity
+@model EbookWebApp.ViewModels.BookViewModel
+
+@{
+    ViewBag.Title = "Get";
+}
+
+
+<h5 class="modal-title" id="exampleModalLongTitle">Dear @User.Identity.GetUserName() </h5>
+
+<p>Do you want to get :</p>
+
+<table class="table margin-top-20">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Author)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Genre)
+        </th>
+        <th></th>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Author)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Genre)
+        </td>
+    </tr>
+    <tr>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    </tr>
+</table>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+        @Html.ActionLink("No", "Index", "Book")
+    </button>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Id)
+        <input type="submit" value="Yes" class="btn btn-default" />
+    }
+</div>
+

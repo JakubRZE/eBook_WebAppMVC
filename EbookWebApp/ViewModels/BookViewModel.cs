@@ -18,7 +18,5 @@ namespace EbookWebApp.ViewModels
         public DateTime ReleaseDate { get; set; }
 
         public virtual ICollection<Order> Orders { get; set; }
-
-        //public Order order { get; set; }
     }
 }
