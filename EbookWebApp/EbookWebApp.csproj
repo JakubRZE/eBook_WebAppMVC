@@ -198,7 +198,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\OrderController.cs" />
-    <Compile Include="Controllers\RatingController.cs" />
     <Compile Include="Infrastructure\AutoMapperWebProfile.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BookController.cs" />
@@ -227,17 +226,12 @@
     <Compile Include="Migrations\201810130130069_addedBookandOrderModels.Designer.cs">
       <DependentUpon>201810130130069_addedBookandOrderModels.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201810151738011_ranDbAdded.cs" />
-    <Compile Include="Migrations\201810151738011_ranDbAdded.Designer.cs">
-      <DependentUpon>201810151738011_ranDbAdded.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Order.cs" />
-    <Compile Include="Models\Rating.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\BookViewModel.cs" />
@@ -358,7 +352,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Services\" />
-    <Folder Include="Views\Rating\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -386,9 +379,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810130130069_addedBookandOrderModels.resx">
       <DependentUpon>201810130130069_addedBookandOrderModels.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201810151738011_ranDbAdded.resx">
-      <DependentUpon>201810151738011_ranDbAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

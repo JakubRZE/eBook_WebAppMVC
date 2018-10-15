@@ -34,9 +34,10 @@
             @Html.DisplayFor(model => model.Genre)
         </td>
     </tr>
-
+    <tr>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    </tr>
 </table>
-@Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal">
