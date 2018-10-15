@@ -48,7 +48,7 @@ namespace EbookWebApp.Controllers
 
             Book book = db.Books.First(o => o.Id == model.Id);
             var vm = Mapper.Map<BookViewModel>(book);
-            ModelState.AddModelError(String.Empty, "You have already this eBook.");
+            ModelState.AddModelError(String.Empty, "You already have this eBook.");
             return View(vm);
         }
 

@@ -46,6 +46,7 @@ namespace EbookWebApp.Models
 
         public DbSet<Book> Books { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
         public IEnumerable ApplicationUsers { get; internal set; }
     }
 }
