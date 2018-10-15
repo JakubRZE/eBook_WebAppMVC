@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using EbookWebApp.Models;
 using EbookWebApp.ViewModels;
 using Microsoft.AspNet.Identity;
@@ -16,6 +17,16 @@ namespace EbookWebApp.Controllers
     public class OrderController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+
+        // GET: Order
+        [Authorize]
+        public ActionResult Index()
+        {
+            var userId = User.Identity.GetUserId();
+            var orders = db.Orders.Where(u => u.AplicationUserId == userId).Include(o => o.AplicationUser).Include(o => o.Book);
+            var vm = orders.ProjectTo<OrderViewModel>().ToList();
+            return View(vm);
+        }
 
         // GET: Order/Get/5
         [Authorize]
@@ -48,20 +59,21 @@ namespace EbookWebApp.Controllers
 
             Book book = db.Books.First(o => o.Id == model.Id);
             var vm = Mapper.Map<BookViewModel>(book);
-            ModelState.AddModelError(String.Empty, "You have already this eBook.");
+            ModelState.AddModelError(String.Empty, "You already have this eBook.");
             return View(vm);
         }
 
-        // GET: Order
-        [Authorize]
-        public ActionResult Index()
+        // GET: Order/Rate
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Rate(int rank, int id)
         {
-            var userId = User.Identity.GetUserId();
+            Order order = db.Orders.Find(id);
+            order.Rank = rank;
+            db.SaveChanges();
 
-            var orders = db.Orders.Where(u => u.AplicationUserId == userId).Include(o => o.AplicationUser).Include(o => o.Book);
-            return View(orders.ToList());
+            return RedirectToAction("Index");
         }
-
 
         // GET: Order/Edit/5
         public ActionResult Edit(int? id)

@@ -21,7 +21,12 @@ namespace EbookWebApp.Infrastructure
         public AutoMapperWebProfile()
         {
             CreateMap<Book, BookViewModel>()
-                .ReverseMap();
+                .ReverseMap()
+                .ForSourceMember(x => x.Overall, opt => opt.Ignore());
+
+            CreateMap<Order, OrderViewModel>()
+               .ReverseMap();
         }
+
     }
 }

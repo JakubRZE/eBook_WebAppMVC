@@ -33,44 +33,54 @@ namespace EbookWebApp.Controllers
             GenreLst.AddRange(GenreQry.Distinct());
             ViewBag.bookGenre = new SelectList(GenreLst);
 
-            var books = from s in db.Books
-                           select s;
+            var books = from book in db.Books
+                           select new
+                           {
+                               Book = book,
+                               avgRating = db.Orders.Where(o => o.BookId == book.Id && o.Rank > 0 ).Select(o => o.Rank).Average()
+                           };
 
             if (!string.IsNullOrEmpty(bookGenre))
             {
-                books = books.Where(s => (s.Title.Contains(searchString) || s.Author.Contains(searchString) ) && s.Genre == bookGenre);
+                books = books.Where(s => (s.Book.Title.Contains(searchString) || s.Book.Author.Contains(searchString) ) && s.Book.Genre == bookGenre);
             }
             else if (!String.IsNullOrEmpty(searchString))
             {
-                books = books.Where(s => s.Title.Contains(searchString) || s.Author.Contains(searchString));
+                books = books.Where(s => s.Book.Title.Contains(searchString) || s.Book.Author.Contains(searchString));
             }
             switch (sortOrder)
             {
                 case "Title_desc":
-                    books = books.OrderByDescending(s => s.Title);
+                    books = books.OrderByDescending(s => s.Book.Title);
                     break;
                 case "Title_asc":
-                    books = books.OrderBy(s => s.ReleaseDate);
+                    books = books.OrderBy(s => s.Book.ReleaseDate);
                     break;
                 case "Author_desc":
-                    books = books.OrderByDescending(s => s.ReleaseDate);
+                    books = books.OrderByDescending(s => s.Book.ReleaseDate);
                     break;
                 case "Author_asc":
-                    books = books.OrderBy(s => s.ReleaseDate);
+                    books = books.OrderBy(s => s.Book.ReleaseDate);
                     break;
                 case "Date_desc":
-                    books = books.OrderByDescending(s => s.ReleaseDate);
+                    books = books.OrderByDescending(s => s.Book.ReleaseDate);
                     break;
                 case "Date_asc":
-                    books = books.OrderBy(s => s.ReleaseDate);
+                    books = books.OrderBy(s => s.Book.ReleaseDate);
                     break;
                 default:
-                    books = books.OrderBy(s => s.Title);
+                    books = books.OrderBy(s => s.Book.Title);
                     break;
             }
 
-            var vm = books.ProjectTo<BookViewModel>().ToList();
+            var vm = new List<BookViewModel>(); // books.ProjectTo<BookViewModel>().ToList();
 
+            foreach (var item in books.ToList())
+            {
+                var vmItem = Mapper.Map<BookViewModel>(item.Book);
+                vmItem.Overall = item.avgRating ??0;
+                vm.Add(vmItem);
+            }
             //var vm = books.ToList().Select(x => Mapper.Map<BookViewModel>(x)).ToList();
             
 

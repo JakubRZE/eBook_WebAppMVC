@@ -10,6 +10,8 @@ namespace EbookWebApp.Models
     {
         public int Id { get; set; }
 
+        public int? Rank { get; set; }
+
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime OrderDate { get; set; }
 

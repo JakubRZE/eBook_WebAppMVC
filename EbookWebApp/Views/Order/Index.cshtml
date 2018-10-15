@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EbookWebApp.Models.Order>
+﻿@model IEnumerable<EbookWebApp.ViewModels.OrderViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -31,6 +31,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.OrderDate)
         </td>
+        <td>
+            @Html.Partial("_Rating", item )
+        </td>
+
+
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })

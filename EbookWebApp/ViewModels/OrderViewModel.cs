@@ -10,6 +10,8 @@ namespace EbookWebApp.ViewModels
     {
         public int Id { get; set; }
 
+        public int? Rank { get; set; }
+
         public DateTime OrderDate { get; set; }
 
         public int BookId { get; set; }

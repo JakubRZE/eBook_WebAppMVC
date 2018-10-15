@@ -1,0 +1,13 @@
+﻿@model EbookWebApp.ViewModels.OrderViewModel
+
+@{
+    if (Model.Rank > 0)
+    {
+        @Html.DisplayFor(Model => Model.Rank)
+    }
+    else
+    {
+        <P>Not rated yet :(</P>
+    }
+}
+
