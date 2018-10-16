@@ -356,6 +356,7 @@
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\Order\Get.cshtml" />
     <Content Include="Views\Order\_Rating.cshtml" />
+    <Content Include="Views\Book\_Rating.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

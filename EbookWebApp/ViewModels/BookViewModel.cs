@@ -19,6 +19,7 @@ namespace EbookWebApp.ViewModels
 
         public virtual ICollection<Order> Orders { get; set; }
 
+        [Display(Name = "Rating")]
         public double Overall { get; set; }
     }
 }

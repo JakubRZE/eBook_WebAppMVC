@@ -20,27 +20,33 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.AplicationUser.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Book.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrderDate)
-        </td>
-        <td>
-            @Html.Partial("_Rating", item )
-        </td>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AplicationUser.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Book.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDate)
+            </td>
+            <td>
+                @Html.Partial("_Rating", item)
+            </td>
 
 
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -29,10 +29,13 @@
             @Html.ActionLink("Author", "Index", new { sortOrder = ViewBag.AuthorSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Genre)
+            
         </th>
         <th>
             @Html.ActionLink("Release date", "Index", new { sortOrder = ViewBag.DateSortParm })
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Overall)
         </th>
         <th></th>
     </tr>
@@ -51,6 +54,10 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ReleaseDate)
+            </td>
+
+            <td>
+                @Html.Partial("_Rating", item)
             </td>
 
             @if (Request.IsAuthenticated)

@@ -1,0 +1,17 @@
+﻿<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@model EbookWebApp.ViewModels.BookViewModel
+
+@{
+    if (Model.Overall > 0)
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            <a href="#" name="Rank" data-rank="@i" data-orderid="@Model.Id"> <span class="fa fa-star @(Model.Overall < i ?"":"checked")"></span> </a>
+        }
+    }
+    else
+    {
+        <P>Not rated yet :(</P>
+    }
+}
+
