@@ -6,12 +6,13 @@
 }
 
 
-<h5 class="modal-title" id="exampleModalLongTitle">Dear @User.Identity.GetUserName() </h5>
+<h2>Dear @User.Identity.GetUserName(),</h2>
+<h4>Do you want to get :</h4>
 
-<p>Do you want to get :</p>
-
+<hr />
+<br/>
 <table class="table margin-top-20">
-    <tr>
+    <tr class="table-warning">
         <th>
             @Html.DisplayNameFor(model => model.Title)
         </th>
@@ -39,9 +40,7 @@
 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">
-        @Html.ActionLink("No", "Index", "Book")
-    </button>
+        @Html.ActionLink("No", "Index", "Book", new {@class = "btn btn-secondary" })
 
     @using (Html.BeginForm())
     {

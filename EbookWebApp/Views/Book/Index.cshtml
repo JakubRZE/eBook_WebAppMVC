@@ -5,11 +5,13 @@
     ViewBag.Title = "Index";
 }
 
+
 <div class="row margin-top-30">
     <div class="col-md-12 text-center">
         <p class="lead movie-logo "> e-Book Store </p>
     </div>
 </div>
+<hr />
 
 
 @using (Html.BeginForm(new { @class = "form-inline" }))
@@ -21,7 +23,7 @@
 
 
 <table class="table margin-top-20">
-    <tr>
+    <tr class="table-info">
         <th>
             @Html.ActionLink("Title", "Index", new { sortOrder = ViewBag.TitleSortParm })
         </th>
@@ -29,7 +31,7 @@
             @Html.ActionLink("Author", "Index", new { sortOrder = ViewBag.AuthorSortParm })
         </th>
         <th>
-            
+            @Html.DisplayNameFor(model => model.Genre)
         </th>
         <th>
             @Html.ActionLink("Release date", "Index", new { sortOrder = ViewBag.DateSortParm })
@@ -42,7 +44,7 @@
 
     @foreach (var item in Model)
     {
-        <tr>
+        <tr class="table-light">
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
@@ -64,9 +66,7 @@
             {
                 <td>
 
-                    <button type="button" class="btn btn-primary">
-                        @Html.ActionLink("Get!", "Get", "Order", new { id = item.Id, @class = "nav-link" }, "")
-                    </button>
+                        @Html.ActionLink("Get!", "Get", "Order", new { id = item.Id }, new {@class = "btn btn-info" })
 
                   
                 </td>
@@ -74,9 +74,7 @@
             else
             {
                 <td>
-                    <button type="button" class="btn btn-primary">
-                        @Html.ActionLink("Get!", "Login", "Account", new { id = item.Id, @class = "nav-link" }, "")
-                    </button>
+                        @Html.ActionLink("Get!", "Login", "Account", new { id = item.Id }, new { @class = "btn btn-primary" })
                 </td>
             }
             @*<td>
@@ -86,7 +84,6 @@
             </td>*@
         </tr>
     }
-
 </table>
 
 @Html.ActionLink("Create New", "Create")

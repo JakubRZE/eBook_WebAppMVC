@@ -1,13 +1,14 @@
 ﻿@model IEnumerable<EbookWebApp.ViewModels.OrderViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Orders";
 }
 
-<h2>Index</h2>
+<h2>Your orders history:</h2>
+<hr/>
 
 <table class="table">
-    <tr>
+    <tr class="table-success">
         <th>
             @Html.DisplayNameFor(model => model.AplicationUser.FirstName)
         </th>
@@ -22,7 +23,7 @@
 
     @foreach (var item in Model)
     {
-        <tr>
+        <tr class="table-light">
             <td>
                 @Html.DisplayFor(modelItem => item.AplicationUser.FirstName)
             </td>
@@ -58,8 +59,8 @@
 
     function SetRating(e) {
         var data = { orderid: $(this).data("orderid"), rank: $(this).data("rank") };
-        $.post("@Url.Action("Rate", "Order")", data)
-        location.reload(); 
+        $.post("@Url.Action("Rate", "Order")", data).then(data =>  location.reload());
+        
     }
     
     $(document).ready(SetRatingControl);
