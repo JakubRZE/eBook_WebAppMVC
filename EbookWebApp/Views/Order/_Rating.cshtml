@@ -1,23 +1,10 @@
 ﻿<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
 @model EbookWebApp.ViewModels.OrderViewModel
 
 @{
-    if (Model.Rank > 0)
+    for (int i = 1; i <= 5; i++)
     {
-        @Html.DisplayFor(Model => Model.Rank)
-    }
-    else
-    {
-        <P>Not rated yet :(</P>
+        <a href="#" name="Rank" data-rank="@i" data-orderid="@Model.Id"> <span class="fa fa-star @(Model.Rank >= i ? "checked":"" )"></span> </a>
     }
 }
 
-@{ 
-
-    for (int i = 0; i < 5; i++)
-    {
-        <a href="#" name="Rank" data-rank="@i" data-orderid="@Model.Id"> <span class="fa fa-star checked"></span> </a>
-    }
-
-}

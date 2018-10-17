@@ -65,10 +65,10 @@ namespace EbookWebApp.Controllers
 
         // GET: Order/Rate
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Rate(int rank, int id)
+        //[ValidateAntiForgeryToken]
+        public ActionResult Rate(int orderid, int rank)
         {
-            Order order = db.Orders.Find(id);
+            Order order = db.Orders.Find(orderid);
             order.Rank = rank;
             db.SaveChanges();
 

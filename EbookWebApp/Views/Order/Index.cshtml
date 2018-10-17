@@ -32,7 +32,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.OrderDate)
             </td>
-            <td>
+            <td id="RatingControl">
                 @Html.Partial("_Rating", item)
             </td>
 
@@ -49,4 +49,19 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+<script>
+
+    function SetRatingControl(e) {
+        var rank = $("#RatingControl a[name='Rank']");
+        rank.on('click', SetRating)
+    }
+
+    function SetRating(e) {
+        var data = { orderid: $(this).data("orderid"), rank: $(this).data("rank") };
+        $.post("@Url.Action("Rate", "Order")", data)
+        location.reload(); 
+    }
+    
+    $(document).ready(SetRatingControl);
+</script>
 }

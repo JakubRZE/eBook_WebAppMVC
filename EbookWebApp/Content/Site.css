@@ -44,3 +44,7 @@ textarea {
 .padding-huge {
     padding: 40px 5px 40px 5px;
 }
+
+.checked {
+    color: #ffd800;
+}
