@@ -7,6 +7,7 @@ using Microsoft.Owin.Security.Google;
 using Owin;
 using EbookWebApp.Models;
 
+
 namespace EbookWebApp
 {
     public partial class Startup
@@ -63,6 +64,6 @@ namespace EbookWebApp
             //    ClientId = "",
             //    ClientSecret = ""
             //});
-        }
+        }     
     }
 }
