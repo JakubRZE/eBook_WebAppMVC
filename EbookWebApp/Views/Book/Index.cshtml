@@ -44,46 +44,55 @@
 
     @foreach (var item in Model)
     {
-        <tr class="table-light">
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Genre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReleaseDate)
-            </td>
+    <tr class="table-light">
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Author)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Genre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReleaseDate)
+        </td>
 
+        <td>
+            @Html.Partial("_Rating", item)
+        </td>
+
+        @if (Request.IsAuthenticated)
+        {
             <td>
-                @Html.Partial("_Rating", item)
+
+                @Html.ActionLink("Get!", "Get", "Order", new { id = item.Id }, new { @class = "btn btn-info" })
+
+
             </td>
-
-            @if (Request.IsAuthenticated)
-            {
-                <td>
-
-                        @Html.ActionLink("Get!", "Get", "Order", new { id = item.Id }, new {@class = "btn btn-info" })
-
-                  
-                </td>
-            }
-            else
-            {
-                <td>
-                        @Html.ActionLink("Get!", "Login", "Account", new { id = item.Id }, new { @class = "btn btn-primary" })
-                </td>
-            }
-            @*<td>
+        }
+        else
+        {
+            <td>
+                @Html.ActionLink("Get!", "Login", "Account", new { id = item.Id }, new { @class = "btn btn-primary" })
+            </td>
+        }
+        @if (User.IsInRole("Admin"))
+        {
+           <td>
                  @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                  @Html.ActionLink("Details", "Details", new { id = item.Id }) |
                  @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>*@
+           </td>
+        }
         </tr>
     }
 </table>
 
-@Html.ActionLink("Create New", "Create")
+@if (User.IsInRole("Admin"))
+{
+    @Html.ActionLink("Create New", "Create")
+}
+
+
+

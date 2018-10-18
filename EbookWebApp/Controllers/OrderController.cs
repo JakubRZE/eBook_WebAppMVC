@@ -28,6 +28,17 @@ namespace EbookWebApp.Controllers
             return View(vm);
         }
 
+        [Authorize(Roles = "Admin")]
+        public ActionResult OrderManage()
+        {
+            var orders = db.Orders;
+
+            ///
+
+            var vm = orders.ToList().Select(x => Mapper.Map<OrderViewModel>(x)).ToList();
+            return View(vm);
+        }
+
         // GET: Order/Get/5
         [Authorize]
         public ActionResult Get(int id)

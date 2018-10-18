@@ -47,5 +47,7 @@ namespace EbookWebApp.Models
         public DbSet<Book> Books { get; set; }
         public DbSet<Order> Orders { get; set; }
         public IEnumerable ApplicationUsers { get; internal set; }
+
+        public System.Data.Entity.DbSet<EbookWebApp.ViewModels.OrderViewModel> OrderViewModels { get; set; }
     }
 }

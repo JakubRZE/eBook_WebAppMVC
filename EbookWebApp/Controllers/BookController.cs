@@ -33,14 +33,7 @@ namespace EbookWebApp.Controllers
                            select d.Genre;
             GenreLst.AddRange(GenreQry.Distinct());
             ViewBag.bookGenre = new SelectList(GenreLst);
-
-            //var books = from book in db.Books
-            //            select new
-            //            {
-            //                Book = book,
-            //                avgRating = db.Orders.Where(o => o.BookId == book.Id && o.Rank > 0).Select(o => o.Rank).Average()
-            //            };
-
+          
             var books = from s in db.Books
                         select s;
 

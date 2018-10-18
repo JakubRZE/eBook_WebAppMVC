@@ -8,9 +8,18 @@
 
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav mr-auto">
+                @if (User.IsInRole("Admin"))
+                {
+                    <li class="nav-item">
+                        @Html.ActionLink("Your orders", "OrderManage", "Order", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+                }
+                else
+                {
                 <li class="nav-item">
                     @Html.ActionLink("Your orders", "Index", "Order", new { area = "" }, new { @class = "nav-link" })
                 </li>
+                }
             </ul>
             @Html.Partial("_LoginPartial")
         </div>
