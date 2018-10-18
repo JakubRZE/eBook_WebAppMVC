@@ -20,11 +20,12 @@ namespace EbookWebApp.Controllers
         // GET: Book
         public ActionResult Index(string sortOrder, string searchString, string bookGenre)
         {
-            
+
 
             ViewBag.TitleSortParm = sortOrder == "Title_desc" ? "Title_asc" : "Title_desc";
             ViewBag.AuthorSortParm = sortOrder == "Author_desc" ? "Author_asc" : "Author_desc";
             ViewBag.DateSortParm = sortOrder == "Date_desc" ? "Date_asc" : "Date_desc";
+            ViewBag.RateSortParm = sortOrder == "Rate_desc" ? "Rate_asc" : "Rate_desc";
 
             var GenreLst = new List<string>();
             var GenreQry = from d in db.Books
@@ -33,57 +34,65 @@ namespace EbookWebApp.Controllers
             GenreLst.AddRange(GenreQry.Distinct());
             ViewBag.bookGenre = new SelectList(GenreLst);
 
-            var books = from book in db.Books
-                           select new
-                           {
-                               Book = book,
-                               avgRating = db.Orders.Where(o => o.BookId == book.Id && o.Rank > 0 ).Select(o => o.Rank).Average()
-                           };
+            //var books = from book in db.Books
+            //            select new
+            //            {
+            //                Book = book,
+            //                avgRating = db.Orders.Where(o => o.BookId == book.Id && o.Rank > 0).Select(o => o.Rank).Average()
+            //            };
+
+            var books = from s in db.Books
+                        select s;
+
+            foreach (var item in books.ToList())
+            {
+                var avgRating = db.Orders.Where(o => o.BookId == item.Id && o.Rank > 0).Select(o => o.Rank).Average();
+                item.Overall = avgRating ?? 0;
+            }
+            db.SaveChanges();
 
             if (!string.IsNullOrEmpty(bookGenre))
             {
-                books = books.Where(s => (s.Book.Title.Contains(searchString) || s.Book.Author.Contains(searchString) ) && s.Book.Genre == bookGenre);
+                books = books.Where(s => (s.Title.Contains(searchString) || s.Author.Contains(searchString)) && s.Genre == bookGenre);
             }
             else if (!String.IsNullOrEmpty(searchString))
             {
-                books = books.Where(s => s.Book.Title.Contains(searchString) || s.Book.Author.Contains(searchString));
+                books = books.Where(s => s.Title.Contains(searchString) || s.Author.Contains(searchString));
             }
             switch (sortOrder)
             {
                 case "Title_desc":
-                    books = books.OrderByDescending(s => s.Book.Title);
+                    books = books.OrderByDescending(s => s.Title);
                     break;
                 case "Title_asc":
-                    books = books.OrderBy(s => s.Book.ReleaseDate);
+                    books = books.OrderBy(s => s.ReleaseDate);
                     break;
                 case "Author_desc":
-                    books = books.OrderByDescending(s => s.Book.ReleaseDate);
+                    books = books.OrderByDescending(s => s.ReleaseDate);
                     break;
                 case "Author_asc":
-                    books = books.OrderBy(s => s.Book.ReleaseDate);
+                    books = books.OrderBy(s => s.ReleaseDate);
                     break;
                 case "Date_desc":
-                    books = books.OrderByDescending(s => s.Book.ReleaseDate);
+                    books = books.OrderByDescending(s => s.ReleaseDate);
                     break;
                 case "Date_asc":
-                    books = books.OrderBy(s => s.Book.ReleaseDate);
+                    books = books.OrderBy(s => s.ReleaseDate);
                     break;
+
+                case "Rate_desc":
+                    books = books.OrderByDescending(s => s.Overall);
+                    break;
+                case "Rate_asc":
+                    books = books.OrderBy(s => s.Overall);
+                    break;
+
                 default:
-                    books = books.OrderBy(s => s.Book.Title);
+                    books = books.OrderBy(s => s.Title);
                     break;
             }
 
-            var vm = new List<BookViewModel>(); // books.ProjectTo<BookViewModel>().ToList();
-
-            foreach (var item in books.ToList())
-            {
-                var vmItem = Mapper.Map<BookViewModel>(item.Book);
-                vmItem.Overall = item.avgRating ??0;
-                vm.Add(vmItem);
-            }
-            //var vm = books.ToList().Select(x => Mapper.Map<BookViewModel>(x)).ToList();
-            
-
+            var vm = books.ToList().Select(x => Mapper.Map<BookViewModel>(x)).ToList();
             return View(vm);
         }
 
@@ -94,7 +103,7 @@ namespace EbookWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Book book = db.Books.Find(id );
+            Book book = db.Books.Find(id);
             if (book == null)
             {
                 return HttpNotFound();

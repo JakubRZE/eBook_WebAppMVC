@@ -10,13 +10,16 @@
 <table class="table">
     <tr class="table-success">
         <th>
-            @Html.DisplayNameFor(model => model.AplicationUser.FirstName)
+            @Html.DisplayNameFor(model => model.Book.Author)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Book.Title)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.OrderDate)
+        </th>
+        <th>
+            Your rating
         </th>
         <th></th>
     </tr>
@@ -25,7 +28,7 @@
     {
         <tr class="table-light">
             <td>
-                @Html.DisplayFor(modelItem => item.AplicationUser.FirstName)
+                @Html.DisplayFor(modelItem => item.Book.Author)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Book.Title)

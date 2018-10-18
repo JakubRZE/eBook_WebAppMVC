@@ -1,6 +1,7 @@
 ﻿using EbookWebApp.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -12,6 +13,7 @@ namespace EbookWebApp.ViewModels
 
         public int? Rank { get; set; }
 
+        [Display(Name = "Order Date")]
         public DateTime OrderDate { get; set; }
 
         public int BookId { get; set; }

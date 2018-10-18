@@ -12,6 +12,7 @@ namespace EbookWebApp.Models
         public string Author { get; set; }
         public string Genre { get; set; }
         public DateTime ReleaseDate { get; set; }
+        public double? Overall { get; set; }
 
         public virtual ICollection<Order> Orders { get; set; }
     }

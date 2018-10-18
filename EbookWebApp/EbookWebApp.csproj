@@ -234,6 +234,14 @@
     <Compile Include="Migrations\201810151918031_ordemodelUpdate.Designer.cs">
       <DependentUpon>201810151918031_ordemodelUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810181759342_OverallPropAddedToBookModel.cs" />
+    <Compile Include="Migrations\201810181759342_OverallPropAddedToBookModel.Designer.cs">
+      <DependentUpon>201810181759342_OverallPropAddedToBookModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810181815040_BookModeUdate.cs" />
+    <Compile Include="Migrations\201810181815040_BookModeUdate.Designer.cs">
+      <DependentUpon>201810181815040_BookModeUdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Book.cs" />
@@ -394,6 +402,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810151918031_ordemodelUpdate.resx">
       <DependentUpon>201810151918031_ordemodelUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810181759342_OverallPropAddedToBookModel.resx">
+      <DependentUpon>201810181759342_OverallPropAddedToBookModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810181815040_BookModeUdate.resx">
+      <DependentUpon>201810181815040_BookModeUdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
