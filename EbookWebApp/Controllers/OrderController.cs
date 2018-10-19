@@ -22,9 +22,15 @@ namespace EbookWebApp.Controllers
         [Authorize]
         public ActionResult Index()
         {
+            if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction("OrderManage");
+            }
+
             var userId = User.Identity.GetUserId();
             var orders = db.Orders.Where(u => u.AplicationUserId == userId).Include(o => o.AplicationUser).Include(o => o.Book);
-            var vm = orders.ProjectTo<OrderViewModel>().ToList();
+            //var vm = orders.ProjectTo<OrderViewModel>().ToList();
+            var vm = orders.ToList().Select(x => Mapper.Map<OrderViewModel>(x)).ToList();
             return View(vm);
         }
 
@@ -53,7 +59,8 @@ namespace EbookWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Get([Bind(Include = "Id")] CreateOrderViewModel model)
         {
-            var order = db.Orders.SingleOrDefault(o => o.BookId == model.Id);
+            var userId = User.Identity.GetUserId();
+            var order = db.Orders.SingleOrDefault(o => o.BookId == model.Id && o.AplicationUserId == userId);
             if (ModelState.IsValid)
             {                
                 if (order == null)
@@ -84,41 +91,6 @@ namespace EbookWebApp.Controllers
             db.SaveChanges();
 
             return RedirectToAction("Index");
-        }
-
-        // GET: Order/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Order order = db.Orders.Find(id);
-            if (order == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.AplicationUserId = new SelectList(db.ApplicationUsers, "Id", "FirstName", order.AplicationUserId);
-            ViewBag.BookId = new SelectList(db.Books, "Id", "Title", order.BookId);
-            return View(order);
-        }
-
-        // POST: Order/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,OrderDate,BookId,AplicationUserId")] Order order)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(order).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.AplicationUserId = new SelectList(db.ApplicationUsers, "Id", "FirstName", order.AplicationUserId);
-            ViewBag.BookId = new SelectList(db.Books, "Id", "Title", order.BookId);
-            return View(order);
         }
 
         // GET: Order/Delete/5

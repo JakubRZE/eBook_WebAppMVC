@@ -124,7 +124,8 @@ namespace EbookWebApp.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(book);
+            var vm = Mapper.Map<CreateBookViewModel>(book);
+            return View(vm);
         }
 
         // GET: Book/Edit/5
@@ -139,7 +140,9 @@ namespace EbookWebApp.Controllers
             {
                 return HttpNotFound();
             }
-            return View(book);
+
+            var vm = Mapper.Map<CreateBookViewModel>(book);
+            return View(vm);
         }
 
         // POST: Book/Edit/5
@@ -155,7 +158,9 @@ namespace EbookWebApp.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(book);
+
+            var vm = Mapper.Map<CreateBookViewModel>(book);
+            return View(vm);
         }
 
         // GET: Book/Delete/5

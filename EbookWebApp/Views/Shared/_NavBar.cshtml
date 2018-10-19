@@ -11,7 +11,7 @@
                 @if (User.IsInRole("Admin"))
                 {
                     <li class="nav-item">
-                        @Html.ActionLink("Your orders", "OrderManage", "Order", new { area = "" }, new { @class = "nav-link" })
+                        @Html.ActionLink("Order Manager", "OrderManage", "Order", new { area = "" }, new { @class = "nav-link" })
                     </li>
                 }
                 else
