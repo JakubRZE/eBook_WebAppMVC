@@ -246,6 +246,10 @@
     <Compile Include="Migrations\201810182303520_adminRole.Designer.cs">
       <DependentUpon>201810182303520_adminRole.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810191339460_update.cs" />
+    <Compile Include="Migrations\201810191339460_update.Designer.cs">
+      <DependentUpon>201810191339460_update.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Book.cs" />
@@ -373,7 +377,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -416,6 +419,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810182303520_adminRole.resx">
       <DependentUpon>201810182303520_adminRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810191339460_update.resx">
+      <DependentUpon>201810191339460_update.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

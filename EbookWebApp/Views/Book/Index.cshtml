@@ -2,7 +2,7 @@
 @model IEnumerable<EbookWebApp.ViewModels.BookViewModel>
 
 @{
-    ViewBag.Title = "Index";
+                ViewBag.Title = "Index";
 }
 
 
@@ -44,47 +44,44 @@
 
     @foreach (var item in Model)
     {
-    <tr class="table-light">
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Author)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Genre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ReleaseDate)
-        </td>
-
-        <td>
-            @Html.Partial("_Rating", item)
-        </td>
-
-        @if (Request.IsAuthenticated)
-        {
+        <tr class="table-light">
             <td>
-
-                @Html.ActionLink("Get!", "Get", "Order", new { id = item.Id }, new { @class = "btn btn-info" })
-
-
+                @Html.DisplayFor(modelItem => item.Title)
             </td>
-        }
-        else
-        {
             <td>
-                @Html.ActionLink("Get!", "Login", "Account", new { id = item.Id }, new { @class = "btn btn-primary" })
+                @Html.DisplayFor(modelItem => item.Author)
             </td>
-        }
-        @if (User.IsInRole("Admin"))
-        {
-           <td>
-                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                 @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-           </td>
-        }
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReleaseDate)
+            </td>
+
+            <td>
+                @Html.Partial("_Rating", item)
+            </td>
+
+            @if (Request.IsAuthenticated)
+            {
+                <td>
+                    @Html.ActionLink("Get!", "Get", "Order", new { id = item.Id }, new { @class = "btn btn-info" })
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.ActionLink("Get!", "Login", "Account", new { id = item.Id }, new { @class = "btn btn-primary" })
+                </td>
+            }
+            @if (User.IsInRole("Admin"))
+            {
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            }
         </tr>
     }
 </table>

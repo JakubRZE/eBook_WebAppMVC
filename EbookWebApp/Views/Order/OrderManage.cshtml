@@ -6,6 +6,11 @@
 
 <h2>Order Manager</h2>
 
+@using (Html.BeginForm(new { @class = "form-inline" }))
+{
+    <input class="form-control mr-sm-2  d-inline" id="SearchString" name="SearchString" type="text" placeholder="Search">
+    <button class="btn btn-secondary my-2 my-sm-0 d-inline" type="submit">Submit</button>
+}
 
 <table class="table ">
     <tr class="table-warning">
@@ -24,21 +29,22 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.AplicationUser.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Book.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrderDate)
-        </td>
-        <td>
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AplicationUser.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Book.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDate)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>

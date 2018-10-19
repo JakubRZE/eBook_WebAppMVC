@@ -35,11 +35,17 @@ namespace EbookWebApp.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public ActionResult OrderManage()
+        public ActionResult OrderManage(string searchString)
         {
-            var orders = db.Orders;
+            var orders = from s in db.Orders
+                         select s;
 
-            ///
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                orders = orders.Where(s => s.AplicationUser.FirstName.Contains(searchString) 
+                                                     || s.Book.Title.Contains(searchString) 
+                                                     || s.Book.Author.Contains(searchString));
+            }
 
             var vm = orders.ToList().Select(x => Mapper.Map<OrderViewModel>(x)).ToList();
             return View(vm);

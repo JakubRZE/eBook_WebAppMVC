@@ -17,7 +17,6 @@ namespace EbookWebApp.Infrastructure
              });
         }
 
-
         public AutoMapperWebProfile()
         {
             CreateMap<Book, BookViewModel>()
