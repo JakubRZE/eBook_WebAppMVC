@@ -1,8 +1,10 @@
-﻿@using Microsoft.AspNet.Identity
-@model IEnumerable<EbookWebApp.ViewModels.BookViewModel>
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<EbookWebApp.ViewModels.BookViewModel>
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@using Microsoft.AspNet.Identity
 
 @{
-                ViewBag.Title = "Index";
+    ViewBag.Title = "Index";
 }
 
 
@@ -16,7 +18,7 @@
 
 @using (Html.BeginForm(new { @class = "form-inline" }))
 {
-    <input class="form-control mr-sm-2  d-inline" id="SearchString" name="SearchString" type="text" placeholder="Search">
+    <input class="form-control mr-sm-2  d-inline" id="SearchString" name="SearchString" type="text" placeholder="Search" value="@ViewBag.CurrentFilter">
     @Html.DropDownList("bookGenre", null, "All", new { @class = "form-control mr-sm-2  d-inline" })
     <button class="btn btn-secondary my-2 my-sm-0 d-inline" type="submit">Submit</button>
 }
@@ -31,7 +33,7 @@
             @Html.ActionLink("Author", "Index", new { sortOrder = ViewBag.AuthorSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Genre)
+            Genre
         </th>
         <th>
             @Html.ActionLink("Release date", "Index", new { sortOrder = ViewBag.DateSortParm })
@@ -86,10 +88,24 @@
     }
 </table>
 
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(
+    Model, page => Url.Action("Index",
+    new
+    {
+        page, sortOrder = ViewBag.CurrentSort,
+        currentFilter = ViewBag.CurrentFilter
+    }
+    ))
+
 @if (User.IsInRole("Admin"))
 {
     @Html.ActionLink("Add New", "Create")
 }
+
+
 
 
 

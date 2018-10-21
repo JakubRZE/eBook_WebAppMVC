@@ -10,6 +10,7 @@ using EbookWebApp.Models;
 using EbookWebApp.ViewModels;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using PagedList;
 
 namespace EbookWebApp.Controllers
 {
@@ -18,14 +19,25 @@ namespace EbookWebApp.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Book
-        public ActionResult Index(string sortOrder, string searchString, string bookGenre)
+        public ActionResult Index(string sortOrder, string searchString, string bookGenre, string currentFilter, int? page)
         {
 
-
+            ViewBag.CurrentSort = sortOrder;
             ViewBag.TitleSortParm = sortOrder == "Title_desc" ? "Title_asc" : "Title_desc";
             ViewBag.AuthorSortParm = sortOrder == "Author_desc" ? "Author_asc" : "Author_desc";
             ViewBag.DateSortParm = sortOrder == "Date_desc" ? "Date_asc" : "Date_desc";
             ViewBag.RateSortParm = sortOrder == "Rate_desc" ? "Rate_asc" : "Rate_desc";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
 
             var GenreLst = new List<string>();
             var GenreQry = from d in db.Books
@@ -58,13 +70,13 @@ namespace EbookWebApp.Controllers
                     books = books.OrderByDescending(s => s.Title);
                     break;
                 case "Title_asc":
-                    books = books.OrderBy(s => s.ReleaseDate);
+                    books = books.OrderBy(s => s.Title);
                     break;
                 case "Author_desc":
-                    books = books.OrderByDescending(s => s.ReleaseDate);
+                    books = books.OrderByDescending(s => s.Author);
                     break;
                 case "Author_asc":
-                    books = books.OrderBy(s => s.ReleaseDate);
+                    books = books.OrderBy(s => s.Author);
                     break;
                 case "Date_desc":
                     books = books.OrderByDescending(s => s.ReleaseDate);
@@ -85,8 +97,16 @@ namespace EbookWebApp.Controllers
                     break;
             }
 
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+           
+
+
             var vm = books.ToList().Select(x => Mapper.Map<BookViewModel>(x)).ToList();
-            return View(vm);
+
+            return View(vm.ToPagedList(pageNumber, pageSize));
+            //return View(vm);
         }
 
         // GET: Book/Details/5
