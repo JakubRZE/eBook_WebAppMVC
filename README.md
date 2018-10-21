@@ -4,12 +4,12 @@
 https://getebook.azurewebsites.net</h4>
 
 Appliaction is modeled on e-Books store.<br />
-Created database logic is more than CRUD.<br />
+Created database has more than CRUD logic and rating system.<br />
 App have two diffrent role here, Admin with more avalible features and User.
 
 <br />
 
-<h4>Hints:</h4><br />
+<h4>Hints:</h4>
 
 To check options avalible for administrator login as:<br />
 User Name:  **Admin**<br />
@@ -19,4 +19,7 @@ Password:   **Admin1!**<br />
 
 To check options for user create your account or just login as:<br />
 User Name:  **User**<br />
-Password:   **User1!**<br />
+Password:   **User1!**<br /><br />
+
+Screenshot:
+![webapp](https://user-images.githubusercontent.com/38703432/47270287-0744d000-d56a-11e8-97e7-8e335564bebc.png)
