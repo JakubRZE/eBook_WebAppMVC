@@ -5,7 +5,7 @@ https://getebook.azurewebsites.net</h4>
 
 Appliaction is modeled on e-Books store.<br />
 Created database has more than CRUD logic and rating system.<br />
-App have two diffrent role here, Admin with more avalible features and User.
+App have two different roles, Admin with more avalible features and User.
 
 <br />
 
