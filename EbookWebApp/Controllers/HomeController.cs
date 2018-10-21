@@ -12,5 +12,10 @@ namespace EbookWebApp.Controllers
         {
             return RedirectToAction("Index", "Book");
         }
+
+        public ActionResult Contact()
+        {
+            return View();
+        }
     }
 }

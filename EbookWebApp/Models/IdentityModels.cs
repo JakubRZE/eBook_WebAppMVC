@@ -18,7 +18,9 @@ namespace EbookWebApp.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
+       
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        [DisplayFormat(DataFormatString = "{0:dd MMMM yyyy}")]
         public DateTime RegistrationDate { get; set; }
 
         public virtual ICollection<Order> Orders {get; set; }

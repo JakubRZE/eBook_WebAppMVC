@@ -17,6 +17,7 @@ namespace EbookWebApp.ViewModels
 
         [Required]
         [Display(Name = "Order Date")]
+        [DisplayFormat(DataFormatString = "{0:dd MMMM yyyy}")]
         public DateTime OrderDate { get; set; }
 
         [Required]

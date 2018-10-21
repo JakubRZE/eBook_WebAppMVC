@@ -16,10 +16,13 @@
                 }
                 else
                 {
-                <li class="nav-item">
-                    @Html.ActionLink("Your orders", "Index", "Order", new { area = "" }, new { @class = "nav-link" })
-                </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Your orders", "Index", "Order", new { area = "" }, new { @class = "nav-link" })
+                    </li>
                 }
+                <li class="nav-item">
+                    @Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })
+                </li>
             </ul>
             @Html.Partial("_LoginPartial")
         </div>

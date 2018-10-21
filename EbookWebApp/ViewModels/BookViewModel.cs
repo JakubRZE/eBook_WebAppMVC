@@ -18,7 +18,7 @@ namespace EbookWebApp.ViewModels
         [Required]
         public string Genre { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}")]
+        [DisplayFormat(DataFormatString = "{0:yyyy}")]
         public DateTime ReleaseDate { get; set; }
 
         public virtual ICollection<Order> Orders { get; set; }
