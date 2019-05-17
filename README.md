@@ -1,7 +1,7 @@
 # EbookWebApp ASP.NET MVC <br /><br />
 
 <h4>Hosted on:<br />
-<s>https://getebook.azurewebsites.net</h4></s> (link expired :< )
+<s>https://getebook.azurewebsites.net (link expired :< )</h4></s> 
 
 Appliaction is modeled on e-Books store.<br />
 Created database has more than CRUD logic and rating system.<br />
